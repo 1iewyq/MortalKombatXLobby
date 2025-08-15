@@ -31,7 +31,7 @@ namespace MKXLobbyClient
             StartMessageRefresh();
 
             // Load existing messages
-            RefreshMessages();
+            _ = RefreshMessages(); // Fix CS4014: explicitly discard the returned Task
         }
 
         private async void BtnSend_Click(object sender, RoutedEventArgs e)
