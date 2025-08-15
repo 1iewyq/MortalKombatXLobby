@@ -1,0 +1,209 @@
+﻿<Window x:Class="MKXLobbyClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Mortal Kombat X - Gaming Lobby" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen" ResizeMode="CanResize">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Background" Value="#FF2D2D30"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FF3F3F46"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="#FF1E1E1E"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FF3F3F46"/>
+        </Style>
+
+        <Style TargetType="ListBox">
+            <Setter Property="Background" Value="#FF1E1E1E"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FF3F3F46"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#FF2D2D30">
+        <!-- Login Panel -->
+        <Grid x:Name="LoginPanel" Visibility="Visible">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Mortal Kombat X - Gaming Lobby" 
+                          FontSize="24" FontWeight="Bold" 
+                          Foreground="Gold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+                <TextBlock Text="Enter Username:" Foreground="White" Margin="5"/>
+                <TextBox x:Name="txtUsername" Width="200" Height="30"/>
+
+                <Button x:Name="btnLogin" Content="Login" Width="100" Height="35" 
+                       Click="BtnLogin_Click" Margin="0,10,0,0"/>
+
+                <TextBlock x:Name="lblLoginStatus" Foreground="Red" 
+                          HorizontalAlignment="Center" Margin="0,10,0,0"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Main Lobby Panel -->
+        <Grid x:Name="MainLobbyPanel" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#FF1E1E1E" Margin="5">
+                <TextBlock x:Name="lblWelcome" Text="Welcome, Player!" 
+                          Foreground="Gold" FontWeight="Bold" 
+                          VerticalAlignment="Center" Margin="10"/>
+
+                <Button x:Name="btnLogout" Content="Logout" 
+                       Click="BtnLogout_Click" HorizontalAlignment="Right"/>
+            </StackPanel>
+
+            <!-- Content Area -->
+            <TabControl Grid.Row="1" Background="#FF2D2D30" Margin="5">
+
+                <!-- Lobby Rooms Tab -->
+                <TabItem Header="Lobby Rooms" Foreground="White">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Available Rooms -->
+                        <GroupBox Grid.Column="0" Header="Available Rooms" 
+                                 Foreground="White" Margin="5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <ListBox x:Name="lstRooms" Grid.Row="0" Margin="5"/>
+
+                                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                    <Button x:Name="btnRefreshRooms" Content="Refresh" 
+                                           Click="BtnRefreshRooms_Click"/>
+                                    <Button x:Name="btnJoinRoom" Content="Join Room" 
+                                           Click="BtnJoinRoom_Click"/>
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+
+                        <!-- Create New Room -->
+                        <GroupBox Grid.Column="1" Header="Create Room" 
+                                 Foreground="White" Margin="5">
+                            <StackPanel>
+                                <TextBlock Text="Room Name:" Foreground="White" Margin="5"/>
+                                <TextBox x:Name="txtNewRoomName" Margin="5"/>
+                                <Button x:Name="btnCreateRoom" Content="Create Room" 
+                                       Click="BtnCreateRoom_Click" Margin="5"/>
+
+                                <TextBlock x:Name="lblRoomStatus" Foreground="Red" 
+                                          TextWrapping="Wrap" Margin="5"/>
+                            </StackPanel>
+                        </GroupBox>
+                    </Grid>
+                </TabItem>
+
+            </TabControl>
+        </Grid>
+
+        <!-- Room Chat Panel -->
+        <Grid x:Name="RoomChatPanel" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Room Header -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#FF1E1E1E" Margin="5">
+                <TextBlock x:Name="lblCurrentRoom" Text="Room: " 
+                          Foreground="Gold" FontWeight="Bold" 
+                          VerticalAlignment="Center" Margin="10"/>
+
+                <Button x:Name="btnLeaveRoom" Content="Leave Room" 
+                       Click="BtnLeaveRoom_Click" HorizontalAlignment="Right" Margin="10,0"/>
+            </StackPanel>
+
+            <!-- Chat Area -->
+            <Grid Grid.Row="1" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Messages and Files -->
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Chat Messages -->
+                    <GroupBox Grid.Row="0" Header="Chat" Foreground="White" Margin="5">
+                        <ScrollViewer x:Name="chatScrollViewer" VerticalScrollBarVisibility="Auto">
+                            <TextBlock x:Name="txtChatMessages" 
+                                      TextWrapping="Wrap" Foreground="White" 
+                                      Background="Transparent" Margin="5"/>
+                        </ScrollViewer>
+                    </GroupBox>
+
+                    <!-- Shared Files -->
+                    <GroupBox Grid.Row="1" Header="Shared Files" Foreground="White" Margin="5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <ListBox x:Name="lstSharedFiles" Grid.Row="0" Margin="5" 
+                                    MouseDoubleClick="LstSharedFiles_MouseDoubleClick"/>
+
+                            <Button x:Name="btnShareFile" Grid.Row="1" Content="Share File" 
+                                   Click="BtnShareFile_Click" Margin="5"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+
+                <!-- Players List -->
+                <GroupBox Grid.Column="1" Header="Players" Foreground="White" Margin="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <ListBox x:Name="lstPlayers" Grid.Row="0" Margin="5" 
+                                MouseDoubleClick="LstPlayers_MouseDoubleClick"/>
+
+                        <Button x:Name="btnRefreshPlayers" Grid.Row="1" Content="Refresh" 
+                               Click="BtnRefreshPlayers_Click" Margin="5"/>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+
+            <!-- Message Input -->
+            <Grid Grid.Row="2" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="txtMessageInput" Grid.Column="0" 
+                        KeyDown="TxtMessageInput_KeyDown" Height="30"/>
+
+                <Button x:Name="btnSendMessage" Grid.Column="1" Content="Send" 
+                       Click="BtnSendMessage_Click" Width="60" Height="30"/>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>

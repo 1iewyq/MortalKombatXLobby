@@ -1,0 +1,67 @@
+﻿<Window x:Class="MKXLobbyDuplexClient.PrivateMessageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Private Chat (Real-time)" Height="400" Width="500"
+        WindowStartupLocation="CenterOwner" ResizeMode="CanResize">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Background" Value="#FF2D2D30"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FF3F3F46"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="#FF1E1E1E"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FF3F3F46"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#FF2D2D30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#FF1E1E1E" Margin="5">
+            <TextBlock x:Name="lblChatWith" 
+                      Text="Private chat with: " 
+                      Foreground="Gold" FontWeight="Bold" 
+                      Margin="10" FontSize="14"/>
+            <TextBlock Text="(Real-time)" 
+                      Foreground="Orange" FontWeight="Bold" 
+                      VerticalAlignment="Center" FontSize="12"/>
+        </StackPanel>
+
+        <!-- Messages Area -->
+        <ScrollViewer Grid.Row="1" x:Name="messagesScrollViewer" 
+                     VerticalScrollBarVisibility="Auto" Margin="5">
+            <TextBlock x:Name="txtMessages" 
+                      TextWrapping="Wrap" Foreground="White" 
+                      Background="Transparent" Margin="5"/>
+        </ScrollViewer>
+
+        <!-- Input Area -->
+        <Grid Grid.Row="2" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="txtMessageInput" Grid.Column="0" 
+                    Height="30" KeyDown="TxtMessageInput_KeyDown"/>
+
+            <Button x:Name="btnSend" Grid.Column="1" 
+                   Content="Send" Width="60" Height="30" 
+                   Click="BtnSend_Click"/>
+        </Grid>
+    </Grid>
+</Window>
