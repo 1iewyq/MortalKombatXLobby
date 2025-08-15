@@ -35,13 +35,18 @@ namespace MKXLobbyClient
         {
             try
             {
-                BasicHttpBinding binding = new BasicHttpBinding();
-                binding.MaxBufferSize = int.MaxValue;
-                binding.MaxReceivedMessageSize = int.MaxValue;
+                // NetTcpBinding instead of BasicHttpBinding
+                NetTcpBinding binding = new NetTcpBinding(SecurityMode.None)
+                {
+                    MaxBufferSize = int.MaxValue,
+                    MaxReceivedMessageSize = int.MaxValue
+                };
                 binding.ReaderQuotas.MaxArrayLength = int.MaxValue;
                 binding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
 
-                EndpointAddress endpoint = new EndpointAddress("http://localhost:8080/LobbyService");
+                // Must match server's net.tcp endpoint address exactly
+                EndpointAddress endpoint = new EndpointAddress("net.tcp://10.1.218.250:8100/LobbyService");
+
                 ChannelFactory<ILobbyService> factory = new ChannelFactory<ILobbyService>(binding, endpoint);
                 lobbyService = factory.CreateChannel();
             }

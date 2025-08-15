@@ -13,37 +13,35 @@ namespace MKXLobbyServer
     {
         static void Main(string[] args)
         {
-            try
+            Console.WriteLine("Welcome to the MKX TCP Lobby Server");
+
+            // Create TCP binding with large limits (like your HTTP binding had)
+            var tcpBinding = new NetTcpBinding(SecurityMode.None)
             {
-                // Create service host for basic HTTP binding
-                ServiceHost basicHost = new ServiceHost(typeof(LobbyService));
+                MaxBufferSize = int.MaxValue,
+                MaxReceivedMessageSize = int.MaxValue
+            };
+            tcpBinding.ReaderQuotas.MaxArrayLength = int.MaxValue;
+            tcpBinding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
 
-                // Configure HTTP endpoint
-                BasicHttpBinding httpBinding = new BasicHttpBinding();
-                httpBinding.MaxBufferSize = int.MaxValue;
-                httpBinding.MaxReceivedMessageSize = int.MaxValue;
-                httpBinding.ReaderQuotas.MaxArrayLength = int.MaxValue;
-                httpBinding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
-
-                basicHost.AddServiceEndpoint(typeof(ILobbyService), httpBinding, "http://localhost:8080/LobbyService");
-
-                // Open hosts
-                basicHost.Open();
-
-                Console.WriteLine("Mortal Kombat X Lobby Server is running...");
-                Console.WriteLine("HTTP Service: http://localhost:8080/LobbyService");
-                Console.WriteLine("Press any key to stop the server...");
-
-                Console.ReadKey();
-
-                // Close hosts
-                basicHost.Close();
-            }
-            catch (Exception ex)
+            // Host your LobbyService class
+            using (var host = new ServiceHost(typeof(LobbyService)))
             {
-                Console.WriteLine($"Error: {ex.Message}");
-                Console.ReadKey();
+                // Bind service endpoint — 0.0.0.0 = listen on all interfaces
+                host.AddServiceEndpoint(typeof(ILobbyService),
+                    tcpBinding,
+                    "net.tcp://10.1.218.250:8100/LobbyService");
+
+                // Open service
+                host.Open();
+                Console.WriteLine("MKX TCP Lobby Server is ONLINE");
+                Console.WriteLine("Listening on net.tcp://0.0.0.0:8100/LobbyService");
+                Console.WriteLine("Press Enter to stop...");
+                Console.ReadLine();
+
+                host.Close();
             }
         }
+
     }
 }
