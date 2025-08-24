@@ -26,6 +26,11 @@ namespace MKXLobbyModels
         public string RoomName { get; set; }
 
         [DataMember]
-        public string FileType { get; set; } // "image" or "text"
+        public string FileType { get; set; } 
+
+        public override string ToString()
+        {
+            return FileName;
+        }
     }
 }

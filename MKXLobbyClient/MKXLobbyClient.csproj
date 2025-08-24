@@ -121,6 +121,7 @@
     <Content Include="Resources\bgm.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\thumb-1920-514625.jpg" />
     <Resource Include="wallpaper.jpg" />
     <Resource Include="Resources\wallpaper.jpg" />
   </ItemGroup>
