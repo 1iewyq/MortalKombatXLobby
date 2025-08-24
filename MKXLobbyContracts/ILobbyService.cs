@@ -6,12 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
 namespace MKXLobbyContracts
 {
     [ServiceContract]
     public interface ILobbyService
     {
-        // User Management
+        //user management
         [OperationContract]
         bool LoginPlayer(string username);
 
@@ -21,7 +23,7 @@ namespace MKXLobbyContracts
         [OperationContract]
         List<string> GetOnlinePlayers();
 
-        // Room Management
+        //room management
         [OperationContract]
         bool CreateRoom(string roomName, string createdBy);
 
@@ -37,7 +39,7 @@ namespace MKXLobbyContracts
         [OperationContract]
         List<string> GetPlayersInRoom(string roomName);
 
-        // Messaging
+        //messaging
         [OperationContract]
         void SendMessage(ChatMessage message);
 
@@ -47,7 +49,7 @@ namespace MKXLobbyContracts
         [OperationContract]
         List<ChatMessage> GetPrivateMessages(string username);
 
-        // File Sharing
+        //file sharing
         [OperationContract]
         bool ShareFile(SharedFile file);
 

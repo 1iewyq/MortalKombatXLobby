@@ -9,14 +9,14 @@ using System.Windows.Input;
 
 namespace MKXLobbyClient
 {
-    public partial class PrivateMessageWindow : Window
+    public partial class PrivateChatWindow : Window
     {
-        private string fromUser;
-        private string toUser;
-        private ILobbyService lobbyService;
+        private readonly string fromUser;
+        private readonly string toUser;
+        private readonly ILobbyService lobbyService;
         private Timer refreshTimer;
 
-        public PrivateMessageWindow(string fromUser, string toUser, ILobbyService lobbyService)
+        public PrivateChatWindow(string fromUser, string toUser, ILobbyService lobbyService)
         {
             InitializeComponent();
 
@@ -24,32 +24,33 @@ namespace MKXLobbyClient
             this.toUser = toUser;
             this.lobbyService = lobbyService;
 
-            lblChatWith.Text = $"Private chat with: {toUser}";
+            lblPrivateChatWith.Text = $"Private Chat with {toUser}";
             Title = $"Private Chat - {toUser}";
 
-            // Start refreshing messages
+            //start refreshing messages
             StartMessageRefresh();
 
-            // Load existing messages
-            _ = RefreshMessages(); // Fix CS4014: explicitly discard the returned Task
+            //load existing messages
+            _ = RefreshMessages();
         }
 
-        private async void BtnSend_Click(object sender, RoutedEventArgs e)
+        private async void BtnSendPrivateMessage_Click(object sender, RoutedEventArgs e)
         {
             await SendMessage();
         }
 
-        private async void TxtMessageInput_KeyDown(object sender, KeyEventArgs e)
+        private async void TxtPrivateMessageInput_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
                 await SendMessage();
+                e.Handled = true; //prevent ding sound on Enter
             }
         }
 
         private async Task SendMessage()
         {
-            string messageContent = txtMessageInput.Text.Trim();
+            string messageContent = txtPrivateMessageInput.Text.Trim();
 
             if (string.IsNullOrEmpty(messageContent))
                 return;
@@ -66,9 +67,9 @@ namespace MKXLobbyClient
                 };
 
                 await Task.Run(() => lobbyService.SendMessage(message));
-                txtMessageInput.Text = "";
+                txtPrivateMessageInput.Text = "";
 
-                // Refresh messages immediately
+                //refresh messages immediately
                 await RefreshMessages();
             }
             catch (Exception ex)
@@ -79,8 +80,7 @@ namespace MKXLobbyClient
 
         private void StartMessageRefresh()
         {
-            refreshTimer = new Timer(async _ => await RefreshMessages(),
-                                   null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+            refreshTimer = new Timer(async _ => await RefreshMessages(), null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
         }
 
         private async Task RefreshMessages()
@@ -89,27 +89,31 @@ namespace MKXLobbyClient
             {
                 var messages = await Task.Run(() => lobbyService.GetPrivateMessages(fromUser));
 
-                // Filter messages between these two users
                 var relevantMessages = messages
-                    .Where(m => (m.From == fromUser && m.To == toUser) ||
-                               (m.From == toUser && m.To == fromUser))
+                    .Where(m => (m.From == fromUser && m.To == toUser) || (m.From == toUser && m.To == fromUser))
                     .OrderBy(m => m.Timestamp)
                     .ToList();
 
                 Dispatcher.Invoke(() =>
                 {
-                    txtMessages.Text = string.Join("\n", relevantMessages.Select(m =>
-                        $"[{m.Timestamp:HH:mm:ss}] {m.From}: {m.Content}"));
+                    txtPrivateChatMessages.Text = string.Join(
+                        "\n",
+                        relevantMessages.Select(m => $"[{m.Timestamp:HH:mm:ss}] {m.From}: {m.Content}")
+                    );
 
-                    // Auto-scroll to bottom
-                    messagesScrollViewer.ScrollToBottom();
+                    //auto-scroll to bottom
+                    scrollPrivateChat.ScrollToEnd();
                 });
             }
             catch (Exception ex)
             {
-                // Handle silently for polling errors
                 Console.WriteLine($"Private message refresh error: {ex.Message}");
             }
+        }
+
+        private void BtnClosePrivateChat_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         protected override void OnClosed(EventArgs e)

@@ -15,32 +15,16 @@ namespace MKXLobbyServer
         {
             Console.WriteLine("Welcome to the MKX TCP Lobby Server");
 
-            // Create TCP binding with large limits (like your HTTP binding had)
-            var tcpBinding = new NetTcpBinding(SecurityMode.None)
-            {
-                MaxBufferSize = int.MaxValue,
-                MaxReceivedMessageSize = int.MaxValue
-            };
-            tcpBinding.ReaderQuotas.MaxArrayLength = int.MaxValue;
-            tcpBinding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
+            var tcp = new NetTcpBinding();
 
-            // Host your LobbyService class
-            using (var host = new ServiceHost(typeof(LobbyService)))
-            {
-                // Bind service endpoint — 0.0.0.0 = listen on all interfaces
-                host.AddServiceEndpoint(typeof(ILobbyService),
-                    tcpBinding,
-                    "net.tcp://10.1.218.250:8100/LobbyService");
+            var host = new ServiceHost(typeof(LobbyService));
+            host.AddServiceEndpoint(typeof(ILobbyService), tcp, "net.tcp://localhost:8100/LobbyService");
+            host.Open();
+            Console.WriteLine("Mortal Kombat X Lobby Server is ONLINE");
+            Console.WriteLine("Press Enter to stop...");
+            Console.ReadLine();
 
-                // Open service
-                host.Open();
-                Console.WriteLine("MKX TCP Lobby Server is ONLINE");
-                Console.WriteLine("Listening on net.tcp://0.0.0.0:8100/LobbyService");
-                Console.WriteLine("Press Enter to stop...");
-                Console.ReadLine();
-
-                host.Close();
-            }
+            host.Close();
         }
 
     }

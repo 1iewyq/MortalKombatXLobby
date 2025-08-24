@@ -7,11 +7,10 @@ using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using MKXLobbyContracts;
 using MKXLobbyModels;
-using System.Runtime.Serialization;
+using System.Windows.Media;
 
 
 namespace MKXLobbyClient
@@ -22,39 +21,21 @@ namespace MKXLobbyClient
         private string currentUsername;
         private string currentRoom;
         private Timer pollTimer;
-        private Dictionary<string, PrivateMessageWindow> privateWindows;
+        private Dictionary<string, PrivateChatWindow> privateWindows;
+        private MediaPlayer backgroundPlayer = new MediaPlayer();
 
         public MainWindow()
         {
             InitializeComponent();
-            InitializeService();
-            privateWindows = new Dictionary<string, PrivateMessageWindow>();
+
+            var tcp = new NetTcpBinding();
+            var URL = "net.tcp://localhost:8100/LobbyService";
+            var chanFactory = new ChannelFactory<ILobbyService>(tcp, URL);
+            lobbyService = chanFactory.CreateChannel();
+            PlayBackgroundMusic();
+            privateWindows = new Dictionary<string, PrivateChatWindow>();
         }
 
-        private void InitializeService()
-        {
-            try
-            {
-                // NetTcpBinding instead of BasicHttpBinding
-                NetTcpBinding binding = new NetTcpBinding(SecurityMode.None)
-                {
-                    MaxBufferSize = int.MaxValue,
-                    MaxReceivedMessageSize = int.MaxValue
-                };
-                binding.ReaderQuotas.MaxArrayLength = int.MaxValue;
-                binding.ReaderQuotas.MaxStringContentLength = int.MaxValue;
-
-                // Must match server's net.tcp endpoint address exactly
-                EndpointAddress endpoint = new EndpointAddress("net.tcp://10.1.218.250:8100/LobbyService");
-
-                ChannelFactory<ILobbyService> factory = new ChannelFactory<ILobbyService>(binding, endpoint);
-                lobbyService = factory.CreateChannel();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to connect to server: {ex.Message}", "Connection Error");
-            }
-        }
 
         private async void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -78,15 +59,15 @@ namespace MKXLobbyClient
                     LoginPanel.Visibility = Visibility.Collapsed;
                     MainLobbyPanel.Visibility = Visibility.Visible;
 
-                    // Start polling for updates
+                    //start polling for updates
                     StartPolling();
 
-                    // Load available rooms
+                    //load available rooms
                     await RefreshRooms();
                 }
                 else
                 {
-                    lblLoginStatus.Text = "Username already exists. Please choose another.";
+                    lblLoginStatus.Text = "Oopss! Username already exists. Please choose a unique username, just like how unique you are :)";
                 }
             }
             catch (Exception ex)
@@ -106,14 +87,14 @@ namespace MKXLobbyClient
                     await Task.Run(() => lobbyService.LogoutPlayer(currentUsername));
                 }
 
-                // Close all private message windows
+                //close all private message windows
                 foreach (var window in privateWindows.Values)
                 {
                     window.Close();
                 }
                 privateWindows.Clear();
 
-                // Reset UI
+                //reset UI
                 currentUsername = null;
                 currentRoom = null;
 
@@ -152,7 +133,7 @@ namespace MKXLobbyClient
                 }
                 else
                 {
-                    lblRoomStatus.Text = "Room name already exists.";
+                    lblRoomStatus.Text = "Oh no! Room name already exists.";
                 }
             }
             catch (Exception ex)
@@ -206,7 +187,7 @@ namespace MKXLobbyClient
                 RoomChatPanel.Visibility = Visibility.Collapsed;
                 MainLobbyPanel.Visibility = Visibility.Visible;
 
-                // Clear room data
+                //clear room data
                 txtChatMessages.Text = "";
                 lstPlayers.Items.Clear();
                 lstSharedFiles.Items.Clear();
@@ -316,19 +297,21 @@ namespace MKXLobbyClient
 
                     if (file != null)
                     {
-                        SaveFileDialog saveFileDialog = new SaveFileDialog();
-                        saveFileDialog.FileName = file.FileName;
+                        //get a temp file path with the correct extension
+                        string tempPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + Path.GetExtension(file.FileName));
+                        File.WriteAllBytes(tempPath, file.FileContent);
 
-                        if (saveFileDialog.ShowDialog() == true)
+                        //open the file with the default application
+                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
                         {
-                            File.WriteAllBytes(saveFileDialog.FileName, file.FileContent);
-                            MessageBox.Show("File downloaded successfully!", "Success");
-                        }
+                            FileName = tempPath,
+                            UseShellExecute = true
+                        });
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error downloading file: {ex.Message}", "Error");
+                    MessageBox.Show($"Error opening file: {ex.Message}", "Error");
                 }
             }
         }
@@ -339,7 +322,7 @@ namespace MKXLobbyClient
             {
                 if (!privateWindows.ContainsKey(selectedPlayer))
                 {
-                    var privateWindow = new PrivateMessageWindow(currentUsername, selectedPlayer, lobbyService);
+                    var privateWindow = new PrivateChatWindow(currentUsername, selectedPlayer, lobbyService);
                     privateWindow.Closed += (s, args) => privateWindows.Remove(selectedPlayer);
                     privateWindows[selectedPlayer] = privateWindow;
                 }
@@ -349,7 +332,17 @@ namespace MKXLobbyClient
             }
         }
 
-        #region Refresh Methods
+        private void PlayBackgroundMusic()
+        {
+            backgroundPlayer.Open(new Uri("Resources/bgm.mp3", UriKind.Relative));
+            backgroundPlayer.MediaEnded += (s, e) =>
+            {
+                backgroundPlayer.Position = TimeSpan.Zero;
+                backgroundPlayer.Play();
+            };
+            backgroundPlayer.Play();
+        }
+
 
         private async void BtnRefreshRooms_Click(object sender, RoutedEventArgs e)
         {
@@ -369,10 +362,28 @@ namespace MKXLobbyClient
 
                 Dispatcher.Invoke(() =>
                 {
+                    //save the currently selected room's RoomName
+                    string selectedRoomName = null;
+                    if (lstRooms.SelectedItem is LobbyRoom selectedRoom)
+                        selectedRoomName = selectedRoom.RoomName;
+
                     lstRooms.Items.Clear();
                     foreach (var room in rooms)
                     {
                         lstRooms.Items.Add(room);
+                    }
+
+                    //restore selection if possible
+                    if (selectedRoomName != null)
+                    {
+                        foreach (var room in lstRooms.Items)
+                        {
+                            if (room is LobbyRoom lobbyRoom && lobbyRoom.RoomName == selectedRoomName)
+                            {
+                                lstRooms.SelectedItem = room;
+                                break;
+                            }
+                        }
                     }
                 });
             }
@@ -395,21 +406,20 @@ namespace MKXLobbyClient
 
                 Dispatcher.Invoke(() =>
                 {
-                    // Update messages
-                    txtChatMessages.Text = string.Join("\n", messages.Select(m =>
-                        $"[{m.Timestamp:HH:mm:ss}] {m.From}: {m.Content}"));
+                    //update messages
+                    txtChatMessages.Text = string.Join("\n", messages.Select(m => $"[{m.Timestamp:HH:mm:ss}] {m.From}: {m.Content}"));
 
-                    // Auto-scroll to bottom
+                    //automatically scroll to bottom
                     chatScrollViewer.ScrollToBottom();
 
-                    // Update players
+                    //update players
                     lstPlayers.Items.Clear();
                     foreach (var player in players)
                     {
                         lstPlayers.Items.Add(player);
                     }
 
-                    // Update files
+                    //update files
                     lstSharedFiles.Items.Clear();
                     foreach (var file in files)
                     {
@@ -419,14 +429,9 @@ namespace MKXLobbyClient
             }
             catch (Exception ex)
             {
-                // Handle silently for polling errors
                 Console.WriteLine($"Polling error: {ex.Message}");
             }
         }
-
-        #endregion
-
-        #region Polling
 
         private void StartPolling()
         {
@@ -440,7 +445,7 @@ namespace MKXLobbyClient
                 {
                     await RefreshRooms();
                 }
-            }, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
+            }, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
         }
 
         private void StopPolling()
@@ -449,7 +454,6 @@ namespace MKXLobbyClient
             pollTimer = null;
         }
 
-        #endregion
 
         protected override void OnClosed(EventArgs e)
         {

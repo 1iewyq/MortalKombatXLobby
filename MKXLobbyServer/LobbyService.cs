@@ -24,7 +24,7 @@ namespace MKXLobbyServer
             lock (lockObject)
             {
                 if (onlinePlayers.ContainsKey(username))
-                    return false; // Username already exists
+                    return false; //seurname already exists
 
                 onlinePlayers[username] = new Player
                 {
@@ -45,7 +45,7 @@ namespace MKXLobbyServer
             {
                 if (onlinePlayers.ContainsKey(username))
                 {
-                    // Remove from current room if any
+                    //remove from current room if any
                     LeaveRoom(username);
 
                     onlinePlayers.Remove(username);
@@ -67,7 +67,7 @@ namespace MKXLobbyServer
             lock (lockObject)
             {
                 if (lobbyRooms.ContainsKey(roomName))
-                    return false; // Room already exists
+                    return false; //room already exists
 
                 lobbyRooms[roomName] = new LobbyRoom
                 {
@@ -96,7 +96,7 @@ namespace MKXLobbyServer
                 if (!lobbyRooms.ContainsKey(roomName) || !onlinePlayers.ContainsKey(username))
                     return false;
 
-                // Leave current room if any
+                //leave current room if any
                 LeaveRoom(username);
 
                 lobbyRooms[roomName].Players.Add(username);
@@ -120,7 +120,7 @@ namespace MKXLobbyServer
                     lobbyRooms[currentRoom].Players.Remove(username);
                     onlinePlayers[username].CurrentRoom = null;
 
-                    // Remove room if empty
+                    //remove room if empty
                     if (lobbyRooms[currentRoom].Players.Count == 0)
                     {
                         lobbyRooms.Remove(currentRoom);

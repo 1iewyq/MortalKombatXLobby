@@ -27,5 +27,11 @@ namespace MKXLobbyModels
             Players = new List<string>();
             CreatedTime = DateTime.Now;
         }
+
+        public override string ToString()
+        {
+            return RoomName;
+        }
     }
+
 }
