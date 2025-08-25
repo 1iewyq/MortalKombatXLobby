@@ -44,7 +44,6 @@ namespace MKXLobbyClient
             if (e.Key == Key.Enter)
             {
                 await SendMessage();
-                e.Handled = true; //prevent ding sound on Enter
             }
         }
 

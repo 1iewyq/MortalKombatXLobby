@@ -165,12 +165,12 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Resources/thumb-1920-514625.jpg"/>
         </Grid.Background>
-        <!--    =-->
+        <!-- Login Panel -->
         <Grid x:Name="LoginPanel" Visibility="Visible">
             <Grid.Background>
                 <ImageBrush ImageSource="/wallpaper.jpg" Stretch="UniformToFill" Opacity="0.8"/>
             </Grid.Background>
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="480,0,0,0" Width="280">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="414,0,0,0" Width="376" Height="248">
 
                 <TextBlock Text="Welcome, Warrior! Prepare to battle in the chat arena."
                            FontSize="14" FontWeight="SemiBold"
@@ -310,7 +310,7 @@
                             <ListBox x:Name="lstSharedFiles" Grid.Row="0" Margin="5,-6,6,24" 
                                     MouseDoubleClick="LstSharedFiles_MouseDoubleClick" Grid.RowSpan="2" Background="#B2240909"/>
                             <Button x:Name="btnShareFile" Grid.Row="1" Content="Share File" 
-                                   Click="BtnShareFile_Click" Margin="227,8,226,2" Width="120"/>
+                                   Click="BtnShareFile_Click" Margin="5" Width="120"/>
                         </Grid>
                     </GroupBox>
                 </Grid>
@@ -342,7 +342,57 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBox x:Name="txtMessageInput" Grid.Column="0" 
-                         KeyDown="TxtMessageInput_KeyDown" Height="34" FontSize="14" Grid.ColumnSpan="4" Margin="5,5,5,5" Background="#B2240909"/>
+                         KeyDown="TxtMessageInput_KeyDown" Height="34" FontSize="14" Grid.ColumnSpan="4" Margin="5,6,24,5" Background="#B2240909"/>
+
+                <Button x:Name="EmojiButton"
+                        Content="😊"
+                        Grid.Column="4"
+                        Width="35"
+                        Height="35"
+                        Margin="5,5,150,5"
+                        Foreground="Gold"
+                        BorderBrush="Firebrick"
+                        FontSize="16"
+                        Click="EmojiButton_Click">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="1"/>
+                            <GradientStop Color="#FF9E2025"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+
+                <!-- Emoji Popup -->
+                <Popup x:Name="EmojiPopup"
+                   PlacementTarget="{Binding ElementName=EmojiButton}"
+                   Placement="Top"
+                   StaysOpen="False">
+                    <Border Background="#CC000000"
+                            BorderBrush="Gray"
+                            BorderThickness="1"
+                            CornerRadius="5"
+                            Padding="5">
+                        <ScrollViewer Height="150" Width="200">
+                            <WrapPanel>
+                                <Button Content="😀" Click="Emoji_Click" FontSize="18" Margin="2"/>
+                                <Button Content="😁" Click="Emoji_Click" FontSize="18" Margin="2"/>
+                                <Button Content="😂" Click="Emoji_Click" FontSize="18" Margin="2"/>
+                                <Button Content="😅" Click="Emoji_Click" FontSize="18" Margin="2"/>
+                                <Button Content="😊" Click="Emoji_Click" FontSize="18" Margin="2"/>
+                                <Button Content="😍" Click="Emoji_Click" FontSize="18" Margin="2"/>
+                                <Button Content="😎" Click="Emoji_Click" FontSize="18" Margin="2"/>
+                                <Button Content="😢" Click="Emoji_Click" FontSize="18" Margin="2"/>
+                                <Button Content="😡" Click="Emoji_Click" FontSize="18" Margin="2"/>
+                                <Button Content="👍" Click="Emoji_Click" FontSize="18" Margin="2"/>
+                                <Button Content="👎" Click="Emoji_Click" FontSize="18" Margin="2"/>
+                                <Button Content="❤️" Click="Emoji_Click" FontSize="18" Margin="2"/>
+                                <Button Content="🔥" Click="Emoji_Click" FontSize="18" Margin="2"/>
+                                <Button Content="🎉" Click="Emoji_Click" FontSize="18" Margin="2"/>
+                                <Button Content="💀" Click="Emoji_Click" FontSize="18" Margin="2"/>
+                            </WrapPanel>
+                        </ScrollViewer>
+                    </Border>
+                </Popup>
 
                 <Button x:Name="btnSendMessage" Grid.Column="4" Content="Send" 
                        Click="BtnSendMessage_Click" Width="70" Height="34" Margin="5,5,0,5"/>

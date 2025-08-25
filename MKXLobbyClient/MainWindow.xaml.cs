@@ -1,4 +1,6 @@
 ﻿using Microsoft.Win32;
+using MKXLobbyContracts;
+using MKXLobbyModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,9 +9,8 @@ using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
-using MKXLobbyContracts;
-using MKXLobbyModels;
 using System.Windows.Media;
 
 
@@ -67,7 +68,7 @@ namespace MKXLobbyClient
                 }
                 else
                 {
-                    lblLoginStatus.Text = "Oopss! Username already exists. Please choose a unique username, just like how unique you are :)";
+                    lblLoginStatus.Text = "Username already exists! Please choose a unique username :)";
                 }
             }
             catch (Exception ex)
@@ -199,7 +200,15 @@ namespace MKXLobbyClient
                 MessageBox.Show($"Error leaving room: {ex.Message}", "Error");
             }
         }
-
+        private void EmojiButton_Click(object sender, RoutedEventArgs e) => EmojiPopup.IsOpen = true;
+        private void Emoji_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                txtMessageInput.Text += btn.Content.ToString();
+                EmojiPopup.IsOpen = false;
+            }
+        }
         private async void BtnSendMessage_Click(object sender, RoutedEventArgs e)
         {
             await SendMessage();
@@ -433,6 +442,7 @@ namespace MKXLobbyClient
             }
         }
 
+        private List<ChatMessage> lastPrivateMessages = new List<ChatMessage>();
         private void StartPolling()
         {
             pollTimer = new Timer(async _ =>
@@ -444,6 +454,32 @@ namespace MKXLobbyClient
                 else
                 {
                     await RefreshRooms();
+                }
+
+                //poll for private messages
+                if (!string.IsNullOrEmpty(currentUsername))
+                {
+                    var privateMessages = await Task.Run(() => lobbyService.GetPrivateMessages(currentUsername));
+                    foreach (var msg in privateMessages)
+                    {
+                        //only show new messages
+                        if (!lastPrivateMessages.Any(m => m.Timestamp == msg.Timestamp && m.From == msg.From && m.Content == msg.Content))
+                        {
+                            //open private chat window if not already open
+                            if (!privateWindows.ContainsKey(msg.From) && msg.From != currentUsername)
+                            {
+                                Dispatcher.Invoke(() =>
+                                {
+                                    var privateWindow = new PrivateChatWindow(currentUsername, msg.From, lobbyService);
+                                    privateWindow.Closed += (s, args) => privateWindows.Remove(msg.From);
+                                    privateWindows[msg.From] = privateWindow;
+                                    privateWindow.Show();
+                                    privateWindow.Activate();
+                                });
+                            }
+                        }
+                    }
+                    lastPrivateMessages = privateMessages;
                 }
             }, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
         }
