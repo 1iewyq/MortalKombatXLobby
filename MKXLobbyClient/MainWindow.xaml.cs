@@ -24,12 +24,25 @@ namespace MKXLobbyClient
         private Timer pollTimer;
         private Dictionary<string, PrivateChatWindow> privateWindows;
         private MediaPlayer backgroundPlayer = new MediaPlayer();
-
         public MainWindow()
         {
             InitializeComponent();
 
+            //configure NetTcpBinding for large file sharing
             var tcp = new NetTcpBinding();
+            tcp.MaxBufferSize = 104857600; //100MB
+            tcp.MaxReceivedMessageSize = 104857600; //100MB
+            tcp.TransferMode = TransferMode.Buffered;
+            tcp.SendTimeout = TimeSpan.FromMinutes(10);
+            tcp.ReceiveTimeout = TimeSpan.FromMinutes(10);
+            tcp.OpenTimeout = TimeSpan.FromMinutes(1);
+            tcp.CloseTimeout = TimeSpan.FromMinutes(1);
+            tcp.ReaderQuotas.MaxArrayLength = 104857600;
+            tcp.ReaderQuotas.MaxStringContentLength = 104857600;
+            tcp.ReaderQuotas.MaxDepth = 32;
+            tcp.ReaderQuotas.MaxBytesPerRead = 4096;
+            tcp.ReaderQuotas.MaxNameTableCharCount = 16384;
+
             var URL = "net.tcp://localhost:8100/LobbyService";
             var chanFactory = new ChannelFactory<ILobbyService>(tcp, URL);
             lobbyService = chanFactory.CreateChannel();
