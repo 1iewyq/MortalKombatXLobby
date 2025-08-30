@@ -42,7 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILobbyServiceCallback.cs" />
     <Compile Include="ILobbyService.cs" />
+    <Compile Include="ILobbyServiceDuplex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
