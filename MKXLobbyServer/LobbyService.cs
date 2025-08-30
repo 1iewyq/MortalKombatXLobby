@@ -62,7 +62,7 @@ namespace MKXLobbyServer
             }
         }
 
-        public bool CreateRoom(string roomName, string createdBy)
+        public bool CreateRoom(string roomName, string createdBy, string username)
         {
             lock (lockObject)
             {
@@ -76,7 +76,11 @@ namespace MKXLobbyServer
                     CreatedTime = DateTime.Now
                 };
 
+                lobbyRooms[roomName].Players.Add(username);
+                onlinePlayers[username].CurrentRoom = roomName;
+
                 Console.WriteLine($"Room {roomName} created by {createdBy}");
+                Console.WriteLine($"Player {username} joined room {roomName}");
                 return true;
             }
         }

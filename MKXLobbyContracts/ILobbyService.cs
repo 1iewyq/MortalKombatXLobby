@@ -25,7 +25,7 @@ namespace MKXLobbyContracts
 
         //room management
         [OperationContract]
-        bool CreateRoom(string roomName, string createdBy);
+        bool CreateRoom(string roomName, string createdBy, string username);
 
         [OperationContract]
         List<LobbyRoom> GetAvailableRooms();

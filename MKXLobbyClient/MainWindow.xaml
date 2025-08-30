@@ -257,6 +257,7 @@
             </TabControl>
         </Grid>
 
+        <!-- Lobby Room Panel -->
         <Grid x:Name="RoomChatPanel" Visibility="Collapsed">
             <Grid.Background>
                 <ImageBrush/>

@@ -137,13 +137,20 @@ namespace MKXLobbyClient
 
             try
             {
-                bool success = await Task.Run(() => lobbyService.CreateRoom(roomName, currentUsername));
-
+                bool success = await Task.Run(() => lobbyService.CreateRoom(roomName, currentUsername, currentUsername));
                 if (success)
                 {
                     lblRoomStatus.Text = $"Room '{roomName}' created successfully!";
                     txtNewRoomName.Text = "";
                     await RefreshRooms();
+
+                    currentRoom = roomName;
+                    lblCurrentRoom.Text = $"Room: {currentRoom}";
+
+                    MainLobbyPanel.Visibility = Visibility.Collapsed;
+                    RoomChatPanel.Visibility = Visibility.Visible;
+
+                    await RefreshRoomData();
                 }
                 else
                 {
