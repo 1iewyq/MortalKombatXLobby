@@ -14,7 +14,7 @@ namespace MKXLobbyServerDuplex
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to the MKX TCP Lobby Server");
+            Console.WriteLine("Welcome to the MKX Lobby Duplex Server");
 
             //configure NetTcpBinding for large file sharing
             var tcp = new NetTcpBinding();

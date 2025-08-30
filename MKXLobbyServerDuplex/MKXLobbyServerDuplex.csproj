@@ -53,11 +53,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Assignment1D\MKXLobbyContracts\MKXLobbyContracts.csproj">
+    <ProjectReference Include="..\MKXLobbyContracts\MKXLobbyContracts.csproj">
       <Project>{e6994986-6c50-499b-b432-dc04cd704cb5}</Project>
       <Name>MKXLobbyContracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Assignment1D\MKXLobbyModels\MKXLobbyModels.csproj">
+    <ProjectReference Include="..\MKXLobbyModels\MKXLobbyModels.csproj">
       <Project>{34b26f41-8b86-4dc6-890a-ff6032812f31}</Project>
       <Name>MKXLobbyModels</Name>
     </ProjectReference>

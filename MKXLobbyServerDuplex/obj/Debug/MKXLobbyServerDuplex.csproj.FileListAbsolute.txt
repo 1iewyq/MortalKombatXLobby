@@ -11,3 +11,16 @@ C:\COMP3008 S2_2025\MKXLobbyServerDuplex\obj\Debug\MKXLobbyServerDuplex.csproj.C
 C:\COMP3008 S2_2025\MKXLobbyServerDuplex\obj\Debug\MKXLobby.051995A8.Up2Date
 C:\COMP3008 S2_2025\MKXLobbyServerDuplex\obj\Debug\MKXLobbyServer.exe
 C:\COMP3008 S2_2025\MKXLobbyServerDuplex\obj\Debug\MKXLobbyServer.pdb
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyServerDuplex\bin\Debug\MKXLobbyServer.exe.config
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyServerDuplex\bin\Debug\MKXLobbyServer.exe
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyServerDuplex\bin\Debug\MKXLobbyServer.pdb
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyServerDuplex\bin\Debug\MKXLobbyContracts.dll
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyServerDuplex\bin\Debug\MKXLobbyModels.dll
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyServerDuplex\bin\Debug\MKXLobbyContracts.pdb
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyServerDuplex\bin\Debug\MKXLobbyModels.pdb
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyServerDuplex\obj\Debug\MKXLobbyServerDuplex.csproj.AssemblyReference.cache
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyServerDuplex\obj\Debug\MKXLobbyServer.exe.config
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyServerDuplex\obj\Debug\MKXLobbyServerDuplex.csproj.CoreCompileInputs.cache
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyServerDuplex\obj\Debug\MKXLobby.051995A8.Up2Date
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyServerDuplex\obj\Debug\MKXLobbyServer.exe
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyServerDuplex\obj\Debug\MKXLobbyServer.pdb

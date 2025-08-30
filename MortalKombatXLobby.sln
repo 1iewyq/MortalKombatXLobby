@@ -11,9 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MKXLobbyServer", "MKXLobbyS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MKXLobbyClient", "MKXLobbyClient\MKXLobbyClient.csproj", "{34887F5E-5370-4DD6-B61C-2925C8294CA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MKXLobbyClientDuplex", "..\MKXLobbyClientDuplex\MKXLobbyClientDuplex.csproj", "{C4B7903A-CD17-494F-9117-4CC5C5C3CB1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MKXLobbyClientDuplex", "MKXLobbyClientDuplex\MKXLobbyClientDuplex.csproj", "{C4B7903A-CD17-494F-9117-4CC5C5C3CB1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MKXLobbyServerDuplex", "..\MKXLobbyServerDuplex\MKXLobbyServerDuplex.csproj", "{25D2E551-A1E2-40C3-93EC-95580E31E982}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MKXLobbyServerDuplex", "MKXLobbyServerDuplex\MKXLobbyServerDuplex.csproj", "{25D2E551-A1E2-40C3-93EC-95580E31E982}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

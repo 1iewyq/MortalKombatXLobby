@@ -25,3 +25,30 @@ C:\COMP3008 S2_2025\MKXLobbyClientDuplex\obj\Debug\PrivateMessageWindowD.baml
 C:\COMP3008 S2_2025\MKXLobbyClientDuplex\obj\Debug\MainWindowD.g.cs
 C:\COMP3008 S2_2025\MKXLobbyClientDuplex\obj\Debug\PrivateMessageWindowD.g.cs
 C:\COMP3008 S2_2025\MKXLobbyClientDuplex\obj\Debug\AppD.g.cs
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\bin\Debug\Resources\bgm.mp3
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\bin\Debug\MKXLobbyClient.exe.config
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\bin\Debug\MKXLobbyClient.exe
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\bin\Debug\MKXLobbyClient.pdb
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\bin\Debug\MKXLobbyContracts.dll
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\bin\Debug\MKXLobbyModels.dll
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\bin\Debug\MKXLobbyServer.exe
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\bin\Debug\MKXLobbyModels.pdb
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\bin\Debug\MKXLobbyContracts.pdb
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\bin\Debug\MKXLobbyServer.pdb
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\bin\Debug\MKXLobbyServer.exe.config
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\obj\Debug\MKXLobbyClientDuplex.csproj.AssemblyReference.cache
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\obj\Debug\MKXLobbyClient.exe.config
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\obj\Debug\MainWindowD.baml
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\obj\Debug\PrivateMessageWindowD.baml
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\obj\Debug\MainWindowD.g.cs
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\obj\Debug\PrivateMessageWindowD.g.cs
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\obj\Debug\AppD.g.cs
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\obj\Debug\MKXLobbyClient_Content.g.cs
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\obj\Debug\MKXLobbyClient_MarkupCompile.cache
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\obj\Debug\MKXLobbyClient.g.resources
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\obj\Debug\MKXLobbyClient.Properties.Resources.resources
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\obj\Debug\MKXLobbyClientDuplex.csproj.GenerateResource.cache
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\obj\Debug\MKXLobbyClientDuplex.csproj.CoreCompileInputs.cache
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\obj\Debug\MKXLobby.D3D27F3D.Up2Date
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\obj\Debug\MKXLobbyClient.exe
+C:\Users\lenovo\OneDrive\Documents\COMP3008 Distributed Computing\MKXLOBBY\MKXLobbyClientDuplex\obj\Debug\MKXLobbyClient.pdb
