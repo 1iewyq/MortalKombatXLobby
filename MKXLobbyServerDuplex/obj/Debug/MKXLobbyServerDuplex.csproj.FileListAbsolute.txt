@@ -1,0 +1,13 @@
+C:\COMP3008 S2_2025\MKXLobbyServerDuplex\bin\Debug\MKXLobbyServer.exe.config
+C:\COMP3008 S2_2025\MKXLobbyServerDuplex\bin\Debug\MKXLobbyServer.exe
+C:\COMP3008 S2_2025\MKXLobbyServerDuplex\bin\Debug\MKXLobbyServer.pdb
+C:\COMP3008 S2_2025\MKXLobbyServerDuplex\bin\Debug\MKXLobbyContracts.dll
+C:\COMP3008 S2_2025\MKXLobbyServerDuplex\bin\Debug\MKXLobbyModels.dll
+C:\COMP3008 S2_2025\MKXLobbyServerDuplex\bin\Debug\MKXLobbyContracts.pdb
+C:\COMP3008 S2_2025\MKXLobbyServerDuplex\bin\Debug\MKXLobbyModels.pdb
+C:\COMP3008 S2_2025\MKXLobbyServerDuplex\obj\Debug\MKXLobbyServerDuplex.csproj.AssemblyReference.cache
+C:\COMP3008 S2_2025\MKXLobbyServerDuplex\obj\Debug\MKXLobbyServer.exe.config
+C:\COMP3008 S2_2025\MKXLobbyServerDuplex\obj\Debug\MKXLobbyServerDuplex.csproj.CoreCompileInputs.cache
+C:\COMP3008 S2_2025\MKXLobbyServerDuplex\obj\Debug\MKXLobby.051995A8.Up2Date
+C:\COMP3008 S2_2025\MKXLobbyServerDuplex\obj\Debug\MKXLobbyServer.exe
+C:\COMP3008 S2_2025\MKXLobbyServerDuplex\obj\Debug\MKXLobbyServer.pdb
