@@ -9,7 +9,7 @@ using System.Windows;
 namespace MKXLobbyClientDuplex
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    /// Interaction logic for AppD.xaml
     /// </summary>
     public partial class AppD : Application
     {
