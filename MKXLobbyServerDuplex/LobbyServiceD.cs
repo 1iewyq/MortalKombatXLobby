@@ -5,8 +5,6 @@ using System.ServiceModel;
 using MKXLobbyContracts;
 using MKXLobbyModels;
 using System.Collections.Concurrent;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MKXLobbyServerDuplex
 {

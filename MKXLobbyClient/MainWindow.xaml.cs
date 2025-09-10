@@ -46,16 +46,6 @@ namespace MKXLobbyClient
             var tcp = new NetTcpBinding();
             tcp.MaxBufferSize = 104857600; //100MB
             tcp.MaxReceivedMessageSize = 104857600; //100MB
-            tcp.TransferMode = TransferMode.Buffered;
-            tcp.SendTimeout = TimeSpan.FromMinutes(10);         //how long to wait when sending
-            tcp.ReceiveTimeout = TimeSpan.FromMinutes(10);      //how long to wait when receiving
-            tcp.OpenTimeout = TimeSpan.FromMinutes(1);          //how long to wait when opening connection
-            tcp.CloseTimeout = TimeSpan.FromMinutes(1);         //how long to wait when closing connection
-            tcp.ReaderQuotas.MaxArrayLength = 104857600;
-            tcp.ReaderQuotas.MaxStringContentLength = 104857600;
-            tcp.ReaderQuotas.MaxDepth = 32;
-            tcp.ReaderQuotas.MaxBytesPerRead = 4096;
-            tcp.ReaderQuotas.MaxNameTableCharCount = 16384;
 
             //create connection to server
             var URL = "net.tcp://localhost:8100/LobbyService";

@@ -1,12 +1,6 @@
 ﻿using MKXLobbyContracts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.ServiceModel.Description;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MKXLobbyServerDuplex
 {
@@ -25,14 +19,6 @@ namespace MKXLobbyServerDuplex
             //set buffer sizes to 100MB to handle large file transfers
             tcp.MaxBufferSize = 104857600; //100MB
             tcp.MaxReceivedMessageSize = 104857600; //100MB
-            //use buffered transfer mode (entire message buffered before processing)
-            tcp.TransferMode = TransferMode.Buffered;
-            //Configure XML reader quotas to handle large messages
-            tcp.ReaderQuotas.MaxArrayLength = 104857600;            //Maxim array length in XML
-            tcp.ReaderQuotas.MaxStringContentLength = 104857600;    //Maximum string content length
-            tcp.ReaderQuotas.MaxDepth = 32;                 //Maximum nesting depth of XML
-            tcp.ReaderQuotas.MaxBytesPerRead = 4096;        //Maximum bytes read at once
-            tcp.ReaderQuotas.MaxNameTableCharCount = 16384; //Maximum characters in name table
 
             //create the Duplex WCF service host using our LobbyServiceD implementation
             var host = new ServiceHost(typeof(LobbyServiceD));
